@@ -36,22 +36,26 @@ void main() {
   stdout.write("Enter Operation: ");
   String opr = stdin.readLineSync()!;
 
-  var ans;
+  int ans;
 
   switch (opr) {
     case "+":
       ans = fNumber + sNumber;
       print("The Sum of $fNumber & $sNumber is $ans");
+      break;
     case "-":
       ans = fNumber - sNumber;
       print("The Subtraction of $fNumber & $sNumber is $ans");
+      break;
     case "x":
     case "X":
       ans = fNumber * sNumber;
       print("The Multiple of $fNumber & $sNumber is $ans");
+      break;
     case "/":
-      ans = fNumber / sNumber;
+      ans = fNumber ~/ sNumber;
       print("The Division of $fNumber & $sNumber is $ans");
+      break;
     default:
       print("You have etered wron...");
   }
