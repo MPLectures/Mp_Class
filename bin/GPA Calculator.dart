@@ -26,19 +26,108 @@ void main() {
 }
 
 gpa(int subjects) {
-  int obtMarks = 0, totalMarks = 0, totalObtMarks = 0, grandTotalMarks = 0;
+  int obtMarks = 0,
+      totalMarks = 0,
+      totalObtMarks = 0,
+      grandTotalMarks = 0,
+      cHours = 0,
+      totalCHours = 0;
+  String grade;
+  double points = 0, totalPoints = 0, finalGPA, grandTotalPoints = 0;
+
   for (int i = 1; i <= subjects; i++) {
     stdout.write("Enter obtained Marks in subject $i: ");
     obtMarks = int.parse(stdin.readLineSync()!);
-
     totalObtMarks += obtMarks;
+    obtMarks = 0;
 
     stdout.write("Enter total Marks in subject $i: ");
     totalMarks = int.parse(stdin.readLineSync()!);
     grandTotalMarks += totalMarks;
+    totalMarks = 0;
+
+    double avg = (totalObtMarks / grandTotalMarks) * 100;
+
+    stdout.write("Credit Hours in subject $i: ");
+    cHours = int.parse(stdin.readLineSync()!);
+    totalCHours += cHours;
+
+    grade = grades(avg);
+    switch (grade) {
+      case 'A+':
+        {
+          points = 4.0;
+          break;
+        }
+      case 'A':
+        {
+          points = 4.0;
+          break;
+        }
+      case 'A-':
+        {
+          points = 3.7;
+          break;
+        }
+      case 'B+':
+        {
+          points = 3.3;
+          break;
+        }
+      case 'B':
+        {
+          points = 3.0;
+          break;
+        }
+      case 'B-':
+        {
+          points = 2.7;
+          break;
+        }
+      case 'C+':
+        {
+          points = 2.3;
+          break;
+        }
+      case 'C':
+        {
+          points = 2.0;
+          break;
+        }
+      case 'C-':
+        {
+          points = 1.7;
+          break;
+        }
+      case 'D+':
+        {
+          points = 1.3;
+          break;
+        }
+      case 'D':
+        {
+          points = 1.0;
+          break;
+        }
+      case 'D-':
+        {
+          points = 0.7;
+          break;
+        }
+      case 'F':
+        {
+          points = 0;
+          break;
+        }
+    }
+
+    totalPoints += points;
+    grandTotalPoints = cHours * totalPoints;
   }
-  double avg = totalObtMarks / grandTotalMarks;
-  return avg;
+
+  finalGPA = grandTotalPoints / totalCHours;
+  grandTotalPoints = 0;
+  return finalGPA;
 }
 
 cgpa(int semesters) {
@@ -58,4 +147,34 @@ cgpa(int semesters) {
   totalCgpa = totalobtGPA / semesters;
 
   return totalCgpa;
+}
+
+grades(double avg) {
+  if (avg > 85 && avg <= 100) {
+    return "A+";
+  } else if (avg >= 80) {
+    return "A";
+  } else if (avg >= 75) {
+    return "A-";
+  } else if (avg >= 70) {
+    return "B+";
+  } else if (avg >= 65) {
+    return "B";
+  } else if (avg >= 60) {
+    return "B-";
+  } else if (avg >= 55) {
+    return "C+";
+  } else if (avg >= 50) {
+    return "C";
+  } else if (avg >= 45) {
+    return "C-";
+  } else if (avg >= 40) {
+    return "D+";
+  } else if (avg >= 35) {
+    return "D";
+  } else if (avg >= 30) {
+    return "D-";
+  } else if (avg >= 0) {
+    return "F";
+  }
 }
