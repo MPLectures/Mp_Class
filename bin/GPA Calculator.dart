@@ -1,27 +1,42 @@
 import 'dart:io';
 
 void main() {
-  stdout.write("what you want to calculate, GPA or CGPA: ");
-  String choice = stdin.readLineSync()!.toLowerCase();
-  int subCount, semCount;
+  bool isRunAgain = true;
 
-  switch (choice) {
-    case 'gpa':
-      {
-        stdout.write("No of Subjects : ");
-        subCount = int.parse(stdin.readLineSync()!);
-        print(gpa(subCount));
-        break;
-      }
-    case 'cgpa':
-      {
-        stdout.write("No of Semesters: ");
-        semCount = int.parse(stdin.readLineSync()!);
-        print("Your CGPA for $semCount semesters is: ${cgpa(semCount)}");
-        break;
-      }
-    default:
-      print("Invalid Choice");
+  while (isRunAgain) {
+    stdout.write("what you want to calculate, GPA or CGPA: ");
+    String choice = stdin.readLineSync()!.toLowerCase();
+
+    int subCount, semCount;
+
+    switch (choice) {
+      case 'gpa':
+        {
+          stdout.write("No of Subjects : ");
+          subCount = int.parse(stdin.readLineSync()!);
+          print("Your GPA for $subCount Subjects is: ${gpa(subCount)}");
+          break;
+        }
+      case 'cgpa':
+        {
+          stdout.write("No of Semesters: ");
+          semCount = int.parse(stdin.readLineSync()!);
+          print("Your CGPA for $semCount semesters is: ${cgpa(semCount)}");
+          break;
+        }
+      default:
+        print("Invalid Choice");
+    }
+    stdout.write(
+        "\nDO you want to calculate again then press 'y' if not then press 'n': ");
+    String againCheck = stdin.readLineSync()!;
+
+    if (againCheck == 'y') {
+      isRunAgain = true;
+    } else if (againCheck == 'n') {
+      isRunAgain = false;
+      print("Thank you for using our GPA Calculator :)");
+    }
   }
 }
 
@@ -127,7 +142,7 @@ gpa(int subjects) {
 
   finalGPA = grandTotalPoints / totalCHours;
   grandTotalPoints = 0;
-  return finalGPA;
+  return finalGPA.toStringAsFixed(2);
 }
 
 cgpa(int semesters) {
